@@ -1,8 +1,17 @@
+import LatestBlogs from "@/components/LatestBlogs/LatestBlogs";
+
 const HomePage = async () => {
+    const data = await fetch("http://localhost:3002/blogs",{
+      next:{
+        revalidate:30
+      }
+    });
+    const blogs = await data.json();
+
   return (
-    <>
-      <h1 className="text-center text-4xl my-5">Latest Blogs</h1>
-    </>
+    <div>
+      <LatestBlogs blogs={blogs} />
+    </div>
   );
 };
 
