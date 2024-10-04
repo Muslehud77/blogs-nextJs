@@ -1,13 +1,14 @@
+"use client"
 import BlogCard from "@/components/ui/BlogCard";
 import { TBlog } from "../types";
+import { useGetBlogsQuery } from "@/redux/api/baseApi";
 
-const BlogPage = async () => {
-  const data = await fetch("http://localhost:3002/blogs", {
-    next: {
-      revalidate: 30,
-    },
-  });
-  const blogs = await data.json();
+const BlogPage =  () => {
+ 
+
+  const {data:blogs,isLoading,isError} = useGetBlogsQuery(undefined)
+
+  
 
   return (
     <div className="w-[90%] mx-auto">
@@ -19,7 +20,7 @@ const BlogPage = async () => {
         unprecedented computational power.
       </p>
       <div className="grid grid-cols-3 gap-4 my-5">
-        {blogs.map((blog: TBlog) => (
+        {blogs?.map((blog: TBlog) => (
           <BlogCard blog={blog} key={blog.id} />
         ))}
       </div>

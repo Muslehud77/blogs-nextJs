@@ -10,7 +10,7 @@ type TBlogs = {
 
 const LatestBlogs = ({blogs}:TBlogs) => {
 
-
+  
   console.log(blogs);
 
   return (
